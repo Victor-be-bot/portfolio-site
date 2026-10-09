@@ -142,3 +142,59 @@ fetch("works.csv")
         });
 
     })
+
+var latitude = 35.6895;
+var longitude = 139.6917;
+
+var weatherUrl =
+    "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=" + latitude +
+    "&longitude=" + longitude +
+    "&current=temperature_2m,weather_code" +
+    "&timezone=Asia%2FTokyo";
+
+fetch(weatherUrl)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        var weatherCode = data.current.weather_code;
+        showWeather(weatherCode);
+    })
+
+function showWeather(code) {
+
+    var icon = document.getElementById("weather-icon");
+
+    if (code === 0) {
+        icon.textContent = "☀";
+        document.body.className = "weather-sunny";
+
+    } else if (code >= 1 && code <= 3) {
+        icon.textContent = "☁";
+        document.body.className = "weather-cloudy"
+
+    } else if (code >= 51 && code <= 67) {
+        icon.textContent = "☂";
+        document.body.className = "weather-cloudy"
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slideshow .slide');
+  if (slides.length === 0) return;
+
+  let currentSlide = 0;
+  const intervalTime = 2500; // 2.5秒
+
+  setInterval(() => {
+    // 現在の画像から active クラスを削除
+    slides[currentSlide].classList.remove('active');
+
+    // 次の画像インデックス（12枚終わったら0に戻る）
+    currentSlide = (currentSlide + 1) % slides.length;
+
+    // 次の画像に active クラスを付与
+    slides[currentSlide].classList.add('active');
+  }, intervalTime);
+});
