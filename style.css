@@ -260,3 +260,14 @@ body.weather-rainy header {
     flex-direction: column;
   }
 }
+#top {
+  position: relative;
+  width: 80%;           /* 画面の幅80%にする */
+  margin: 75px auto 0;  /* auto で左右中央寄せにする */
+  height: 65vh;
+  min-height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
